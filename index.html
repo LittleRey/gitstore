@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>GitStore</title>
+
+    <meta name="keywords" content="GitStore,Git图床" />
+    <meta name="description" content="GitStore,Git图床,基于Git服务商提供存储、图床。" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="css/upload.css?v1" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">GitStore</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://ss.netnr.com/contact">联系</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="padding-top:80px;">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted">请勿上传违反中国法律的文件，违者后果自负。</p>
+                <div id="wrapper">
+                    <div id="container">
+                        <div id="uploader">
+                            <div class="queueList">
+                                <div id="dndArea" class="placeholder">
+                                    <div id="filePicker" style="height:90px;"></div>
+                                    <p>截图粘贴、拖到这里，单次最多可选10个</p>
+                                </div>
+                            </div>
+                            <div class="statusBar" style="display:none;">
+                                <div class="progress">
+                                    <span class="text">0%</span>
+                                    <span class="percentage"></span>
+                                </div><div class="info"></div>
+                                <div class="btns">
+                                    <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row hidden" id="divnt">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#rt_1" data-toggle="tab" aria-expanded="true">URL</a></li>
+                    <li><a href="#rt_2" data-toggle="tab" aria-expanded="false">HTML</a></li>
+                    <li><a href="#rt_3" data-toggle="tab" aria-expanded="false">Markdown</a></li>
+                    <li><a href="#rt_4" data-toggle="tab" aria-expanded="false">Delete Link</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content" id="tcpane" style="margin-top:15px;font-size:14px;">
+                    <div class="tab-pane active" id="rt_1">
+                        <ul class="list-group"></ul>
+                    </div>
+                    <div class="tab-pane" id="rt_2">
+                        <ul class="list-group"></ul>
+                    </div>
+                    <div class="tab-pane" id="rt_3">
+                        <ul class="list-group"></ul>
+                    </div>
+                    <div class="tab-pane" id="rt_4">
+                        <ul class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">消息</h4>
+                    </div>
+                    <div class="modal-body" id="myModalBody" style="word-break:break-word;word-wrap:break-word;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position:fixed;bottom:0;left:0;right:0;line-height:60px;height:60px;color:#333;text-align:center;border-top:1px solid #eee">
+        <p>&copy; <a href="https://www.netnr.com">netnr</a></p>
+    </div>
+
+    <script src="https://lib.baomitu.com/webuploader/0.1.1/webuploader.html5only.min.js"></script>
+    <script src="js/upload.js?v1"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124641448-6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-124641448-6');
+    </script>
+
+</body>
+</html>

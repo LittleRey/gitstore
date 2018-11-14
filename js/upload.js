@@ -163,7 +163,7 @@
             paste: document.body,
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'https://www.netnr.com/api/id/99',
+            server: 'https://www.netnr.com/api/id/98',
             //禁用图片压缩
             compress: false,
             // runtimeOrder: 'flash',
@@ -176,9 +176,9 @@
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
-            fileNumLimit: 10,
-            fileSizeLimit: 5 * 1024 * 1024,    // 5 M
-            fileSingleSizeLimit: 5 * 1024 * 1024    // 5 M            
+            fileNumLimit: 100,
+            fileSizeLimit: 50 * 1024 * 1024,    // 50 M
+            fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M            
         });
 
         // 拖拽时不接受 js, txt 文件。

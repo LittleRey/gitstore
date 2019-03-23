@@ -240,7 +240,6 @@
                 cli(0, gs + fp);
                 cli(1, '<img src="' + gs + fp + '" alt="' + fn + '" title="' + fn + '" />');
                 cli(2, '![' + fn + '](' + gs + fp + ')');
-                cli(3, 'Not open');
 
                 if ($('#tcpane').attr('data-autoselect') != "1") {
                     $('#tcpane').click(function (e) {

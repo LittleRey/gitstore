@@ -163,7 +163,7 @@
             paste: document.body,
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'https://www.netnr.com/api/id/98',
+            server: 'https://www.netnr.com/api/api98',
             //禁用图片压缩
             compress: false,
             // runtimeOrder: 'flash',
@@ -225,12 +225,11 @@
         });
 
         uploader.on('uploadSuccess', function (file, response) {
-            if (response.Code == 100) {
+            if (response.code == 200) {
                 console.log(response);
                 $('#divnt').removeClass('hidden');
-                var gs = response.Data.GitServer + "/",
-                    fp = response.Data.FilePath,
-                    fn = response.Data.FilePath.split('.')[0].slice(-10),
+                var gs = response.data.server, fp = response.data.path,
+                    fn = response.data.path.split('.')[0].slice(-10),
                     uls = $('#tcpane').find('ul'),
                     cli = function (index, hm) {
                         var jli = $('<li class="list-group-item"><input class="form-control" readonly style="background-color:#f9f9f9" /></li>');
@@ -253,7 +252,7 @@
                     $('#tcpane').attr('data-autoselect', 1);
                 }
             } else {
-                Alert(response.Message);
+                Alert(response.msg);
             }
         });
 

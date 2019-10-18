@@ -157,7 +157,7 @@
                 label: '选择文件'
             },
             formData: {
-                or: "netnr/test"
+                or: "netnr/static"
             },
             dnd: '#dndArea',
             paste: document.body,

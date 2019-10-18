@@ -157,13 +157,13 @@
                 label: '选择文件'
             },
             formData: {
-                uid: 123
+                or: "netnr/test"
             },
             dnd: '#dndArea',
             paste: document.body,
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'https://www.netnr.com/api/api98',
+            server: 'https://upload.zme.ink',
             //禁用图片压缩
             compress: false,
             // runtimeOrder: 'flash',
@@ -224,21 +224,26 @@
             window.uploader = uploader;
         });
 
+        //【兼容处理，CFW对FormData文件暂不支持】单个文件上传时，带上文件的base64，即传两倍数据
+        uploader.on('uploadStart', function (file) {
+            this.options.formData.content = encodeURIComponent(file.base64);
+        });
+
         uploader.on('uploadSuccess', function (file, response) {
-            if (response.code == 200) {
-                console.log(response);
+            console.log(response);
+            if (response.download_url) {
                 $('#divnt').removeClass('hidden');
-                var gs = response.data.server, fp = response.data.path,
-                    fn = response.data.path.split('.')[0].slice(-10),
+                var gs = response.download_url.replace("githubusercontent.com", "zme.ink"),
+                    fn = response.name,
                     uls = $('#tcpane').find('ul'),
                     cli = function (index, hm) {
                         var jli = $('<li class="list-group-item"><input class="form-control" readonly style="background-color:#f9f9f9" /></li>');
                         jli.find('input').val(hm);
                         uls.eq(index).append(jli);
                     };
-                cli(0, gs + fp);
-                cli(1, '<img src="' + gs + fp + '" alt="' + fn + '" title="' + fn + '" />');
-                cli(2, '![' + fn + '](' + gs + fp + ')');
+                cli(0, gs);
+                cli(1, '<img src="' + gs + '" alt="' + fn + '" title="' + fn + '" />');
+                cli(2, '![' + fn + '](' + gs + ')');
 
                 if ($('#tcpane').attr('data-autoselect') != "1") {
                     $('#tcpane').click(function (e) {
@@ -252,7 +257,7 @@
                     $('#tcpane').attr('data-autoselect', 1);
                 }
             } else {
-                Alert(response.msg);
+                Alert('fail');
             }
         });
 
@@ -555,6 +560,13 @@
             addFile(file);
             setState('ready');
             updateTotalProgress();
+
+            //【兼容处理，CFW对FormData文件暂不支持】添加base64
+            var r = new FileReader();
+            r.onload = function () {
+                file.base64 = this.result.split(',')[1];
+            }
+            r.readAsDataURL(file.source.source);
         };
 
         uploader.onFileDequeued = function (file) {
@@ -567,7 +579,6 @@
 
             removeFile(file);
             updateTotalProgress();
-
         };
 
         uploader.on('all', function (type) {

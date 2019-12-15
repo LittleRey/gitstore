@@ -162,8 +162,9 @@
             dnd: '#dndArea',
             paste: document.body,
             chunked: false,
-            chunkSize: 512 * 1024,
+            threads: 1,
             server: 'https://upload.zme.ink',
+            sendAsBinary: true,
             //禁用图片压缩
             compress: false,
             // runtimeOrder: 'flash',
@@ -222,11 +223,6 @@
 
         uploader.on('ready', function () {
             window.uploader = uploader;
-        });
-
-        //【兼容处理，CFW对FormData文件暂不支持】单个文件上传时，带上文件的base64，即传两倍数据
-        uploader.on('uploadStart', function (file) {
-            this.options.formData.content = encodeURIComponent(file.base64);
         });
 
         uploader.on('uploadSuccess', function (file, response) {

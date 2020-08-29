@@ -36,12 +36,22 @@
     <div class="container" style="padding-top:80px;">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="input-group">
-                    <span class="input-group-addon">owner/repo</span>
-                    <input type="text" class="form-control" id="txtor" placeholder="用户/仓库，例：netnr/np">
-                    <span class="input-group-addon">token</span>
-                    <input type="text" class="form-control" id="txttoken" placeholder="访问仓库的 token">
+                    <span class="input-group-addon">* owner / repo</span>
+                    <input type="text" class="form-control" id="txtor" placeholder="必填，用户/仓库，例：netnr/np">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">* token</span>
+                    <input type="text" class="form-control" id="txttoken" placeholder="必填，访问仓库的 token">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-addon">path（单个文件）</span>
+                    <input type="text" class="form-control" id="txtpath" placeholder="可选，默认：yyyy/MM/dd/xx.ext">
                 </div>
             </div>
             <div class="col-md-12">

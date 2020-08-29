@@ -14,8 +14,7 @@
 var $wrap = $('#uploader'),
 
     // 图片容器
-    $queue = $('<ul class="filelist"></ul>')
-        .appendTo($wrap.find('.queueList')),
+    $queue = $('<ul class="filelist"></ul>').appendTo($wrap.find('.queueList')),
 
     // 状态栏，包括进度和控制按钮
     $statusBar = $wrap.find('.statusBar'),
@@ -68,53 +67,13 @@ var $wrap = $('#uploader'),
         //sendAsBinary: true,
         //禁用图片压缩
         compress: false,
-        // runtimeOrder: 'flash',
-
-        //accept: {
-        //    title: 'Images',
-        //    extensions: 'gif,jpg,jpeg,bmp,png',
-        //    mimeTypes: 'image/*'
-        //},
 
         // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
         disableGlobalDnd: true,
-        fileNumLimit: 100,
-        fileSizeLimit: 5 * 1024 * 1024 - 1000,    // 5MB
+        fileNumLimit: 10,
+        fileSizeLimit: 50 * 1024 * 1024,    // 50MB
         fileSingleSizeLimit: 5 * 1024 * 1024 - 1000    // 5MB
     });
-
-// 拖拽时不接受 js, txt 文件。
-uploader.on('dndAccept', function (items) {
-    var denied = false,
-        len = items.length,
-        i = 0,
-        // 修改js类型
-        unAllowed = 'text/plain;application/javascript ';
-
-    for (; i < len; i++) {
-        // 如果在列表里面
-        if (~unAllowed.indexOf(items[i].type)) {
-            denied = true;
-            break;
-        }
-    }
-
-    return !denied;
-});
-
-uploader.on('dialogOpen', function () {
-    //console.log('here');
-});
-
-// uploader.on('filesQueued', function() {
-//     uploader.sort(function( a, b ) {
-//         if ( a.name < b.name )
-//           return -1;
-//         if ( a.name > b.name )
-//           return 1;
-//         return 0;
-//     });
-// });
 
 // 添加“添加文件”的按钮，
 uploader.addButton({
@@ -198,7 +157,7 @@ function addFile(file) {
     if (file.getStatus() === 'invalid') {
         showError(file.statusText);
     } else {
-        // @todo lazyload
+
         $wrap.text('预览中');
         uploader.makeThumb(file, function (error, src) {
             var img;
@@ -316,20 +275,17 @@ function updateStatus() {
     var text = '', stats;
 
     if (state === 'ready') {
-        text = '选中' + fileCount + '个文件，共' +
-            WebUploader.formatSize(fileSize) + '。';
+        text = '选中' + fileCount + '个文件，共' + WebUploader.formatSize(fileSize) + '。';
     } else if (state === 'confirm') {
         stats = uploader.getStats();
         if (stats.uploadFailNum) {
-            text = '已成功上传' + stats.successNum + '个文件，' +
-                stats.uploadFailNum + '个文件上传失败，<a class="retry" href="#">重新上传</a>失败文件或<a class="ignore" href="#">忽略</a>'
+            text = '已成功上传' + stats.successNum + '个文件，' + stats.uploadFailNum
+                + '个文件上传失败，<a class="retry" href="javascript:void(0);">重新上传</a>失败文件或<a class="ignore" href="javascript:void(0);">忽略</a>'
         }
 
     } else {
         stats = uploader.getStats();
-        text = '共' + fileCount + '个文件（' +
-            WebUploader.formatSize(fileSize) +
-            '），已上传' + stats.successNum + '个文件';
+        text = '共' + fileCount + '个文件（' + WebUploader.formatSize(fileSize) + '），已上传' + stats.successNum + '个文件';
 
         if (stats.uploadFailNum) {
             text += '，失败' + stats.uploadFailNum + '个文件';
@@ -404,8 +360,7 @@ function setState(val) {
 }
 
 uploader.onUploadProgress = function (file, percentage) {
-    var $li = $('#' + file.id),
-        $percent = $li.find('.progress span');
+    var $li = $('#' + file.id), $percent = $li.find('.progress span');
 
     $percent.css('width', percentage * 100 + '%');
     percentages[file.id][1] = percentage;
@@ -439,6 +394,16 @@ uploader.onFileDequeued = function (file) {
     removeFile(file);
     updateTotalProgress();
 };
+
+//单个文件上传时
+uploader.onUploadStart = function () {
+    if ($('#txtpath').val() != "") {
+        uploader.options.formData.path = $('#txtpath').val();
+        $('#txtpath').val('');
+    } else {
+        delete uploader.options.formData.path;
+    }
+}
 
 uploader.on('all', function (type) {
     switch (type) {

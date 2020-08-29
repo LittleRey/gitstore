@@ -79,8 +79,8 @@ var $wrap = $('#uploader'),
         // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
         disableGlobalDnd: true,
         fileNumLimit: 100,
-        fileSizeLimit: 50 * 1024 * 1024,    // 50 M
-        fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M            
+        fileSizeLimit: 5 * 1024 * 1024 - 1000,    // 5MB
+        fileSingleSizeLimit: 5 * 1024 * 1024 - 1000    // 5MB
     });
 
 // 拖拽时不接受 js, txt 文件。

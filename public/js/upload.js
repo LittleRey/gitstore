@@ -503,14 +503,8 @@ var ls = {
         $('#txtor').val(ls.config.or || "");
         $('#txttoken').val(ls.config.token || "");
 
-        $('#txtor').on('input', function () {
-            uploader.options.formData.or = ls.config.or = this.value;
-            ls.set('config', ls.config)
-        });
-        $('#txttoken').on('input', function () {
-            uploader.options.formData.token = ls.config.token = this.value;
-            ls.set('config', ls.config)
-        });
+        uploader.options.formData.or = ls.config.or;
+        uploader.options.formData.token = ls.config.token;
     },
     get: function (key) {
         var ko = localStorage.getItem(key);
@@ -521,3 +515,12 @@ var ls = {
     }
 };
 ls.init();
+
+$('#txtor').on('input', function () {
+    uploader.options.formData.or = ls.config.or = this.value;
+    ls.set('config', ls.config)
+});
+$('#txttoken').on('input', function () {
+    uploader.options.formData.token = ls.config.token = this.value;
+    ls.set('config', ls.config)
+});

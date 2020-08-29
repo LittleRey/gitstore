@@ -11,7 +11,7 @@
     <meta name="keywords" content="GitStore,Git图床" />
     <meta name="description" content="GitStore,Git图床,基于Git服务商提供存储、图床。" />
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
     <link href="https://code.bdstatic.com/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.bdstatic.com/npm/jquery@1.12.4/dist/jquery.min.js"></script>
@@ -31,18 +31,20 @@
                 </button>
                 <a href="/" class="navbar-brand">GitStore</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="https://upload.zme.ink" title="POST 一个文件，Max 50MB">接口</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
     <div class="container" style="padding-top:80px;">
 
         <div class="row">
             <div class="col-md-12">
-                <p class="text-danger">请勿上传违反中国法律的文件，违者后果自负。</p>
+                <div class="input-group">
+                    <span class="input-group-addon">owner/repo</span>
+                    <input type="text" class="form-control" id="txtor" placeholder="用户/仓库，例：netnr/np">
+                    <span class="input-group-addon">token</span>
+                    <input type="text" class="form-control" id="txttoken" placeholder="访问仓库的 token">
+                </div>
+            </div>
+            <div class="col-md-12">
                 <div id="wrapper">
                     <div id="container">
                         <div id="uploader">
